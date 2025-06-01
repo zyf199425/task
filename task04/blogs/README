@@ -1,0 +1,204 @@
+
+接口测试结果
+1、注册接口： POST  /api/user/register
+入参：
+{
+    "userName": "李四",
+    "password": "123456789",
+    "email": "12345678@qq.com"
+}
+出参： "注册成功！"
+
+2、登录接口： POST  /api/user/login
+入参：
+{
+    "userName": "李四",
+    "password": "123456789"
+}
+出参：
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDg4NjE1MTMsInVzZXJJZCI6NiwidXNlck5hbWUiOiLmnY7lm5sifQ.wpAjr8B19q1ue3OJQ3155-LJFkz_wtIVkeqBPrz_64M"
+}
+
+-- 后续操作需要将登录接口返回的token 放到请求的header里
+
+3、创建文章： POST /api/post/create
+入参：
+{
+    "title": "go语言从入门到精通",
+    "Content": "学习Go语言（Golang）从入门到精通是一个逐步深入的过程，涵盖了基础语法、标准库、并发编程、网络编程、性能优化以及实战应用等多个方面。下面我将为你提供一个详细的路线图，帮助你系统地学习Go语言"
+}
+出参： "创建文章成功！"
+
+4、更新文章： POST /api/post/update
+入参：
+{
+    "id": 1,
+    "title": "go语言从入门到精通",
+    "Content": "学习Go语言（Golang）从入门到精通是一个逐步深入的过程，涵盖了基础语法、标准库、并发编程、网络编程、性能优化以及实战应用等多个方面。下面我将为你提供一个详细的路线图，帮助你系统地学习Go语言！！！！！！"
+}
+出参： "更新文章成功！"
+
+更新不是自己的文章
+入参：
+{
+    "id": 3,
+    "title": "go语言从入门到精通",
+    "Content": "学习Go语言（Golang）从入门到精通是一个逐步深入的过程，涵盖了基础语法、标准库、并发编程、网络编程、性能优化以及实战应用等多个方面。下面我将为你提供一个详细的路线图，帮助你系统地学习Go语言！！！！！！"
+}
+出参：
+{
+    "error": "您没有权限修改该文章！"
+}
+
+5、根据ID查询文章详情 GET /api/post/getById?id=1
+出参：
+{
+    "id": 1,
+    "title": "go语言从入门到精通",
+    "content": "学习Go语言（Golang）从入门到精通是一个逐步深入的过程，涵盖了基础语法、标准库、并发编程、网络编程、性能优化以及实战应用等多个方面。下面我将为你提供一个详细的路线图，帮助你系统地学习Go语言！！！！！！",
+    "userId": 6,
+    "user": {
+        "id": 6,
+        "userName": "李四",
+        "password": "$2a$10$bWPLUpfLaeAA7H8xh7/HIO/mPWEEQBi8Q4ZdfWwWPlrqHPE488KNm",
+        "email": "12345678@qq.com",
+        "createdAt": "2025-06-01T18:51:43.03+08:00",
+        "updatedAt": "2025-06-01T18:51:43.03+08:00"
+    },
+    "createdAt": "2025-06-01T18:56:15.692+08:00",
+    "updatedAt": "2025-06-01T19:03:16.216+08:00"
+}
+
+6、分页查询文章列表 GET /api/post/getAll?pageNum=1&pageSize=10
+出参：
+[
+    {
+        "id": 1,
+        "title": "go语言从入门到精通",
+        "content": "学习Go语言（Golang）从入门到精通是一个逐步深入的过程，涵盖了基础语法、标准库、并发编程、网络编程、性能优化以及实战应用等多个方面。下面我将为你提供一个详细的路线图，帮助你系统地学习Go语言！！！！！！",
+        "userId": 6,
+        "user": {
+            "id": 0,
+            "userName": "",
+            "password": "",
+            "email": "",
+            "createdAt": null,
+            "updatedAt": null
+        },
+        "createdAt": "2025-06-01T18:56:15.692+08:00",
+        "updatedAt": "2025-06-01T19:03:16.216+08:00"
+    },
+    {
+        "id": 2,
+        "title": "gorm 入门",
+        "content": "Gorm是一个用于Go语言的ORM（对象关系映射）库，它使用简洁的API，对数据库进行操作。在Gorm出现之前，Go开发者需要手动编写SQL语句，处理数据类型的转换问题以及异常处理等繁琐操作。使用了Gorm后，它可以自动完成CRUD的操作，简化了数据库操作过程，降低了开发难度",
+        "userId": 6,
+        "user": {
+            "id": 0,
+            "userName": "",
+            "password": "",
+            "email": "",
+            "createdAt": null,
+            "updatedAt": null
+        },
+        "createdAt": "2025-06-01T18:58:02.848+08:00",
+        "updatedAt": "2025-06-01T18:58:02.848+08:00"
+    },
+    {
+        "id": 3,
+        "title": "gin 从入门到精通",
+        "content": "Gin是一个golang的微框架，封装比较优雅，API友好，源码注释比较明确，具有快速灵活，容错方便等特点对于golang而言，web框架的依赖要远比Python，Java之类的要小。自身的net/http足够简单，性能也非常不错借助框架开发，不仅可以省去很多常用的封装带来的时间，也有助于团队的编码风格和形成规范",
+        "userId": 4,
+        "user": {
+            "id": 0,
+            "userName": "",
+            "password": "",
+            "email": "",
+            "createdAt": null,
+            "updatedAt": null
+        },
+        "createdAt": "2025-06-01T18:59:18.158+08:00",
+        "updatedAt": "2025-06-01T18:59:18.158+08:00"
+    }
+]
+
+7、删除文章： POST /api/post/deleteById?id=1
+出参： "删除文章成功！"
+
+8、创建评论： POST /api/comment/create
+入参：
+{
+    "postId": 2,
+    "content": "非常棒!非常棒!非常棒!非常棒!"
+}
+出参： "创建评论成功！"
+
+9、根据文章ID查询评论 GET /api/comment/getByPostId?postId=2
+出参：
+[
+    {
+        "id": 1,
+        "content": "非常棒!非常棒!非常棒!非常棒!",
+        "userId": 6,
+        "user": {
+            "id": 6,
+            "userName": "李四",
+            "password": "$2a$10$bWPLUpfLaeAA7H8xh7/HIO/mPWEEQBi8Q4ZdfWwWPlrqHPE488KNm",
+            "email": "12345678@qq.com",
+            "createdAt": "2025-06-01T18:51:43.03+08:00",
+            "updatedAt": "2025-06-01T18:51:43.03+08:00"
+        },
+        "postId": 2,
+        "post": {
+            "id": 2,
+            "title": "gorm 入门",
+            "content": "Gorm是一个用于Go语言的ORM（对象关系映射）库，它使用简洁的API，对数据库进行操作。在Gorm出现之前，Go开发者需要手动编写SQL语句，处理数据类型的转换问题以及异常处理等繁琐操作。使用了Gorm后，它可以自动完成CRUD的操作，简化了数据库操作过程，降低了开发难度",
+            "userId": 6,
+            "user": {
+                "id": 6,
+                "userName": "李四",
+                "password": "$2a$10$bWPLUpfLaeAA7H8xh7/HIO/mPWEEQBi8Q4ZdfWwWPlrqHPE488KNm",
+                "email": "12345678@qq.com",
+                "createdAt": "2025-06-01T18:51:43.03+08:00",
+                "updatedAt": "2025-06-01T18:51:43.03+08:00"
+            },
+            "createdAt": "2025-06-01T18:58:02.848+08:00",
+            "updatedAt": "2025-06-01T18:58:02.848+08:00"
+        },
+        "createdAt": "2025-06-01T19:16:07.433+08:00",
+        "updatedAt": "2025-06-01T19:16:07.433+08:00"
+    },
+    {
+        "id": 2,
+        "content": "非常棒!非常棒!非常棒!非常棒!2222",
+        "userId": 6,
+        "user": {
+            "id": 6,
+            "userName": "李四",
+            "password": "$2a$10$bWPLUpfLaeAA7H8xh7/HIO/mPWEEQBi8Q4ZdfWwWPlrqHPE488KNm",
+            "email": "12345678@qq.com",
+            "createdAt": "2025-06-01T18:51:43.03+08:00",
+            "updatedAt": "2025-06-01T18:51:43.03+08:00"
+        },
+        "postId": 2,
+        "post": {
+            "id": 2,
+            "title": "gorm 入门",
+            "content": "Gorm是一个用于Go语言的ORM（对象关系映射）库，它使用简洁的API，对数据库进行操作。在Gorm出现之前，Go开发者需要手动编写SQL语句，处理数据类型的转换问题以及异常处理等繁琐操作。使用了Gorm后，它可以自动完成CRUD的操作，简化了数据库操作过程，降低了开发难度",
+            "userId": 6,
+            "user": {
+                "id": 6,
+                "userName": "李四",
+                "password": "$2a$10$bWPLUpfLaeAA7H8xh7/HIO/mPWEEQBi8Q4ZdfWwWPlrqHPE488KNm",
+                "email": "12345678@qq.com",
+                "createdAt": "2025-06-01T18:51:43.03+08:00",
+                "updatedAt": "2025-06-01T18:51:43.03+08:00"
+            },
+            "createdAt": "2025-06-01T18:58:02.848+08:00",
+            "updatedAt": "2025-06-01T18:58:02.848+08:00"
+        },
+        "createdAt": "2025-06-01T19:16:54.836+08:00",
+        "updatedAt": "2025-06-01T19:16:54.836+08:00"
+    }
+]
